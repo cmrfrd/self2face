@@ -7,7 +7,7 @@ minikube profile self2face
 minikube start \
 	 --memory=10192 \
 	 --cpus=8 \
-	 --disk-size=42GB \
+	 --disk-size=55GB \
 	 --vm-driver=kvm2 \
 	 --gpu \
 	 --insecure-registry localhost:5000 \
@@ -15,6 +15,7 @@ minikube start \
 
 ## Add nvidia plugins
 ## for gpu access
+sleep 60
 minikube addons enable nvidia-gpu-device-plugin
 minikube addons enable nvidia-driver-installer
 
