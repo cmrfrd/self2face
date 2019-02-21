@@ -1,0 +1,16 @@
+name: self2face-cpu
+dependencies:
+- tensorflow-cpu==1.11.0
+- nodejs=11.9.0
+- pandas=0.24.1
+- jupyterlab=0.35.4
+- pyviz/label/dev::pyviz=0.10.0
+- pip:
+    - json2yaml==1.1.1
+    - papermill==0.17.1
+    - dlib==19.16.0
+    - opencv-python==4.0.0.21
+    - ffmpeg-python==0.1.17
+    - pillow==5.4.1
+    - ipynb==0.5.1
+    - ipywebrtc==0.4.3
