@@ -1,0 +1,23 @@
+## Windows gaming setup
+
+In this text file are the steps to setup
+windows gaming on this machine.
+
+This configuration and checklist is specifically designed for this machine.
+
+## Hardware requirements
+1. Enable VT-d intel technology in the BIOS
+2. Ensure there are 2 seperate graphics cards installed in the machine
+3. Ensure there are 2 seperate monitors for each graphics card
+## Software requirements
+4. Ensure vfio kernal modules are in /etc/modules
+5. Run enable_pci_passthrough.sh to update the grub config for passthrough
+6. Run disable_pci_passthrough.sh to update the grub config for no passthrough
+
+7. Reboot system
+8. Run is_pci_passthrough_enabled.sh
+9. Run run-gaming-machine.sh
+
+## References
+
+https://davidyat.es/2016/09/08/gpu-passthrough/
