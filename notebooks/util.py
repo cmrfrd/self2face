@@ -25,10 +25,10 @@ def run_cell(notebook_path, cell_number=None, cell_tag=None):
                 if cell_tag in cell.metadata.tags:
                     cell_source = cell.source
                     break
-                else:
+        else:
             assert cell_source, "Unable to find cell with tag %s" % cell_tag
 
-            elif cell_number is not None:
+    elif cell_number is not None:
 
         assert cell_number in range(
             len(nb_code_cells)), "cell_number outside of range"
