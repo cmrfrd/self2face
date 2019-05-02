@@ -1,7 +1,7 @@
 ## Setup variable configuration
 export HOME_DIR=$(pwd)
 export PATH_PREFIX=${1:-mnt}
-export KUBEFLOW_TAG=${2:-v0.4.0}
+export KUBEFLOW_TAG=${2:-v0.4.1}
 export KUBEFLOW_SRC=${3:-kubeflow-src}
 export KF_APP=${4:-kubeflow-app}
 
@@ -32,7 +32,9 @@ fi
 ## apply generated deployments
 KUBEFLOW_REPO=${download_path}
 cd $app_path
-${download_path}/scripts/kfctl.sh init ${KF_APP} --platform minikube
+${download_path}/scripts/kfctl.sh \
+		init ${KF_APP} \
+		--platform minikube
 cd ${app_path}/${KF_APP}
 ${download_path}/scripts/kfctl.sh generate all
 ${download_path}/scripts/kfctl.sh apply all
