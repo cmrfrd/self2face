@@ -10,7 +10,6 @@ minikube start \
 	 --disk-size=55GB \
 	 --vm-driver=kvm2 \
 	 --gpu \
-	 --insecure-registry localhost:5000 \
 	 --profile self2face
 
 ## Add nvidia plugins

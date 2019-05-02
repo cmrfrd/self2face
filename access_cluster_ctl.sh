@@ -1,6 +1,6 @@
 CONTROL_IMAGE_NAME=self2face
 CONTROL_IMAGE_TAG=ctl
-CONTROL_IMAGE_DOCKERFILE=ctl/docker/Dockerfile.ctl
+CONTROL_IMAGE_DOCKERFILE=ctl/dockerfiles/Dockerfile.ctl
 CONTROL_IMAGE_PATH=ctl/
 
 if [ ! "$(docker images | grep $CONTROL_IMAGE_NAME | grep $CONTROL_IMAGE_TAG | wc -l)" -gt "0" ]
@@ -13,12 +13,13 @@ fi
 docker run \
        --rm \
        --net host \
-       -v $(pwd)/$CONTROL_IMAGE_PATH:/root/ctl \
-       -v ~/.kube:/root/.kube:z \
-       -v ~/.helm:/root/.helm:z \
-       -v ~/.minikube:/root/.minikube:z \
+       -e HOME=$HOME \
+       -v $(pwd)/$CONTROL_IMAGE_PATH:$HOME/ctl \
+       -v ~/.kube:$HOME/.kube:z \
+       -v ~/.helm:$HOME/.helm:z \
+       -v ~/.minikube:$HOME/.minikube:z \
        -v /var/run/docker.sock:/var/run/docker.sock:z \
-       -w /root/ctl \
+       -w $HOME/ctl \
        -it $CONTROL_IMAGE_NAME:$CONTROL_IMAGE_TAG \
        $@
 
