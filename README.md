@@ -20,7 +20,16 @@ Create and access a `control` (`ctl`) container with tools to control the cluste
 $ ./access_cluster_ctl.sh
 ```
 
-#### Step 3 Deploy kubeflow
+#### Step 3 Build container
+
+Build the jupyter self2face container
+
+``` shell
+$ source minikube-env.sh
+$ docker-compose -f dockerfiles/docker-compose.yml build
+```
+
+#### Step 4 Deploy kubeflow
 
 Deploy kubeflow on minikube and mount local directory as pvc via shell script (configure to preference)
 
@@ -29,7 +38,7 @@ $ ./bin/deploy_kubeflow.sh
 $ ./bin/create_host_pvc.sh
 ```
 
-#### Step 4 Access kubeflow components
+#### Step 5 Access kubeflow components
 
 Access components via port forwarding
 
