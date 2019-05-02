@@ -1,0 +1,9 @@
+version: "3"
+services:
+  self2face-jupyter:
+    image: self2face-jupyter:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.self2face
+      args:
+        mode: gpu
