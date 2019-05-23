@@ -1,0 +1,10 @@
+gnupg
+curl
+build-essential
+cmake
+graphviz-dev
+libssl1.0.0
+libssl-dev
+ffmpeg
+jq
+texlive-xetex

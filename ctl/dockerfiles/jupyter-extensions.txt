@@ -1,0 +1,11 @@
+@pyviz/jupyterlab_pyviz
+@jupyterlab/hub-extension
+jupyter-webrtc
+@oriolmirosa/jupyterlab_materialdarker
+jupyterlab_tensorboard
+@jupyterlab/toc
+@jupyterlab/celltags
+@jupyterlab/latex
+@ijmbarr/jupyterlab_spellchecker
+
+

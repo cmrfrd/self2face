@@ -1,11 +1,14 @@
 name: self2face-gpu
 dependencies:
-- tensorflow-gpu==1.11.0
 - nodejs=11.9.0
 - pandas=0.24.1
 - jupyterlab=0.35.4
+- pytorch
+- torchvision
+- cudatoolkit
 - pyviz/label/dev::pyviz=0.10.0
 - pyviz/label/dev::hvplot=0.4.0
+- pip
 - pip:
     - json2yaml==1.1.1
     - papermill==0.17.1
@@ -15,3 +18,8 @@ dependencies:
     - pillow==5.4.1
     - ipynb==0.5.1
     - ipywebrtc==0.4.3
+    - tf-nightly-gpu-2.0-preview
+    - tfp-nightly
+    - tensorflow_datasets
+    - minio
+    - jupyterlab_latex

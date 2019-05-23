@@ -5,18 +5,14 @@ FROM $BASE_IMAGE
 ARG mode
 ENV MODE=${mode}
 
+USER root
+
 ## os dependencies
+ADD apt.txt /apt.txt
 RUN apt-get update &&\
-    apt-get install -y gnupg \
-                       curl \
-	               build-essential \
-                       cmake \
-                       graphviz-dev \
-                       libssl1.0.0 \
-                       libssl-dev \
-                       ffmpeg \
-                       jq &&\
-    curl -sL https://deb.nodesource.com/setup_8.x | bash &&\
+    cat /apt.txt | xargs -l apt-get install -y &&\
+    rm /apt.txt &&\
+    curl -sL https://deb.nodesource.com/setup_9.x | bash &&\
     apt-get install -y nodejs &&\
     apt-get clean &&\
     pip install yq &&\
@@ -42,12 +38,24 @@ RUN bash -c "source activate $(cat $ENVIRONMENT | yq -r .name ) &&\
              python3 -m ipykernel install --user --name $(cat $ENVIRONMENT | yq -r .name ) --display-name \"$(cat $ENVIRONMENT | yq -r .name )\""
 
 ## Install extensions
+ADD jupyter-extensions.txt /jupyter-extensions.txt
 RUN bash -c "source activate $(cat $ENVIRONMENT | yq -r .name ) &&\
-    	     jupyter labextension install @pyviz/jupyterlab_pyviz &&\
-             jupyter labextension install jupyter-webrtc &&\
-             jupyter labextension install @oriolmirosa/jupyterlab_materialdarker"
+	     cat /jupyter-extensions.txt | xargs -l jupyter labextension install &&\
+             rm /jupyter-extensions.txt"
 
 ## Activate environment then run notebook
 ENV DISABLE_TFMA_EXTENSION=1
-RUN echo "source activate $(cat $ENVIRONMENT | yq -r .name )" > ~/.bashrc
-CMD ["start-notebook.sh"]
+RUN echo "source activate $(cat $ENVIRONMENT | yq -r .name )" > /home/${NB_USER}/.bashrc
+
+## Add conda environment as kernel
+RUN bash -c "source activate $(cat $ENVIRONMENT | yq -r .name ) &&\
+	     python -m ipykernel install --user \
+                                         --name $(cat $ENVIRONMENT | yq -r .name ) \
+                                         --display-name $(cat $ENVIRONMENT | yq -r .name )"
+
+## Permissions
+RUN chown ${NB_USER} -R /home/${NB_USER}/
+
+## Final user setup
+USER ${NB_USER}
+CMD ["bash", "-ic", "start-notebook.sh"]
