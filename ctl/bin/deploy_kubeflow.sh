@@ -1,7 +1,7 @@
 ## Setup variable configuration
 export HOME_DIR=$(pwd)
 export PATH_PREFIX=${1:-mnt}
-export KUBEFLOW_TAG=${2:-v0.4.1}
+export KUBEFLOW_TAG=${2:-v0.5.1}
 export KUBEFLOW_SRC=${3:-kubeflow-src}
 export KF_APP=${4:-kubeflow-app}
 
@@ -38,3 +38,10 @@ ${download_path}/scripts/kfctl.sh \
 cd ${app_path}/${KF_APP}
 ${download_path}/scripts/kfctl.sh generate all
 ${download_path}/scripts/kfctl.sh apply all
+
+
+pushd $app_path${KF_APP}/ks_app/
+ks param set notebooks pvcMount "/home/jovyan/storage/"
+ks param set jupyter useJupyterLabAsDefault true
+ks apply default
+popd
