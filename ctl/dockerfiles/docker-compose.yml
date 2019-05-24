@@ -1,7 +1,7 @@
 version: "3"
 services:
   self2face-jupyter:
-    image: self2face-jupyter:latest
+    image: self2face-jupyter:gpu
     build:
       context: .
       dockerfile: Dockerfile.self2face

@@ -1,6 +1,6 @@
 ## Allow use to configure cpu or gpu
 ARG mode
-ARG BASE_IMAGE=gcr.io/kubeflow-images-public/tensorflow-1.12.0-notebook-$mode:v0.4.0
+ARG BASE_IMAGE=gcr.io/kubeflow-images-public/tensorflow-2.0.0a0-notebook-$mode:v0.5.0
 FROM $BASE_IMAGE
 ARG mode
 ENV MODE=${mode}
@@ -58,4 +58,4 @@ RUN chown ${NB_USER} -R /home/${NB_USER}/
 
 ## Final user setup
 USER ${NB_USER}
-CMD ["bash", "-ic", "start-notebook.sh"]
+CMD ["bash", "-ic", "jupyter notebook --notebook-dir=/home/${NB_USER} --ip=0.0.0.0 --no-browser --port=8888 --NotebookApp.token='' --NotebookApp.password='' --NotebookApp.allow_origin='*' --NotebookApp.base_url=${NB_PREFIX}"]
