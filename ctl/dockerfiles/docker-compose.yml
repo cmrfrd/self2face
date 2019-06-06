@@ -7,3 +7,4 @@ services:
       dockerfile: Dockerfile.self2face
       args:
         mode: gpu
+        user: root
